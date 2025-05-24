@@ -1,0 +1,49 @@
+
+# SIGNUP (Register a new Admin)
+POST http://localhost:3000/adminSignup
+Content-Type: application/json
+
+{
+  "name": "adminTwo",
+  "email": "adminTwo@example.com",
+  "password": "123456",
+  "secret": "Bekijunior"
+}
+###
+# SIGNUP (Register a new user)
+POST http://localhost:3000/signup
+Content-Type: application/json
+
+{
+  "name": "userOne",
+  "email": "userOne@example.com",
+  "password": "123456"
+}
+####
+#Login
+
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+  "email": "userone@example.com",
+  "password": "123456"
+}
+###  {
+#   "email": "userOne@example.com",
+#   "password": "123456"
+# }
+###
+# GET ALL Users
+GET http://localhost:3000/getusers/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODAyODY5OTFmMmQ2MGIwYjMyNTI5M2EiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NDQ5OTk2NDIsImV4cCI6MTc0NTAwMzI0Mn0.54-LKSsCDFw1a4asyZx0jO61UVka6nOsKQWqVefHcSs
+
+####
+PUT http://localhost:3000/reserveseat/6828e46fabe75f3677acdca5
+Content-Type: application/json
+
+{
+  "seat":1,
+  "userId":"6828e46fabe75f3677acdca5"
+}
+

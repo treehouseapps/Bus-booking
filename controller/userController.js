@@ -1,0 +1,115 @@
+// const bcrypt = require("bcryptjs");
+// const jwt = require("jsonwebtoken");
+const userModel = require('../models/userModel')
+
+const home = async (req, res) => {
+    res.json({ message: 'Main page' })
+}
+
+// Admin signup logic
+const adminSignup = async (req, res) => {
+    try {
+        const { name, email, password, secret } = req.body;
+        if (!name || !email || !password || !secret) {
+            return res.status(400).json({ message: "All fields are required" });
+        }
+
+        if (secret !== process.env.ADMIN_SECRET) {
+            return res.status(403).json({ message: "Invalid secret code" });
+        }
+
+        const existingUser = await userModel.findOne({ email });
+        if (existingUser) {
+            return res.status(400).json({ message: "Email is already registered" });
+        }
+        // const hashedPassword = await bcrypt.hash(password, 10);
+
+        const newAdmin = await userModel.create({
+            name,
+            email,
+            password,
+            role: 'admin'
+        });
+
+        // const token = jwt.sign({ userId: newAdmin._id }, process.env.JWT_SECRET, { expiresIn: "1h" });
+
+        res.status(201).json({
+            message: "Admin created successfully",
+            // token,
+            user: {
+                id: newAdmin._id,
+                name: newAdmin.name,
+                email: newAdmin.email,
+                role: newAdmin.role
+            }
+        });
+
+    } catch (error) {
+        res.status(500).json({ message: "Server error", error: error.message });
+    }
+};
+
+const signUp = async (req, res) => {
+    try {
+        const { name, email, password } = req.body;
+        if (!name || !email || !password) {
+            return res.status(400).json({ message: "All fields are required" });
+        }
+        const existingUser = await userModel.findOne({ email });
+        if (existingUser) {
+            return res.status(400).json({ message: 'Email is already registered' });
+        }
+        // const hashedPassword = await bcrypt.hash(password, 10);
+        const newUser = await userModel.create({
+            name: name.trim(),
+            email: email.trim(),
+            password,
+            role: 'user'
+        });
+        // const token = jwt.sign({ userId: newUser._id }, process.env.JWT_SECRET, { expiresIn: "1h" });
+
+        res.status(201).json({
+            message: "User Registered Successfully",
+            // token,
+            user: {
+                id: newUser._id,
+                name: newUser.name,
+                email: newUser.email,
+                role: newUser.role
+            }
+        });
+
+    } catch (error) {
+        res.status(500).json({ message: "Server error", error: error.message });
+    }
+};
+
+const login = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+
+        // Check if user exists
+        const user = await userModel.findOne({ email });
+        if (!user) return res.status(400).json({ message: "User Not Existed" });
+
+        // Compare passwords
+        if (password == user.password) {
+            let a = user.password
+            res.json({ message: "Login successful", password, a });
+        }
+        else {
+            return res.status(400).json({ message: "Password is Not Match" });
+        }
+        // const isMatch = await bcrypt.compare(password, user.password);
+        // if (!isMatch) return res.status(400).json({ message: "Password is Not Match" });
+
+        // Generate JWT token
+        // const token = jwt.sign({ userId: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: "1h" });
+
+        // res.json({ message: "Login successful", token });
+    } catch (err) {
+        res.status(500).json({ message: "Server error", error: err.message });
+    }
+};
+
+module.exports = { home, adminSignup, login, signUp }

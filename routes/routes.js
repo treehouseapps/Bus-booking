@@ -1,0 +1,18 @@
+const express = require('express')
+const app = express()
+const { home, adminSignup, login, signUp } = require('../controller/userController')
+const { getRoutes, addRoutes, deleteRoute } = require('../controller/routeController')
+const { addBus, getBus, deleteBus, reserveSeat } = require('../controller/busController')
+
+app.get('/', home)
+app.post('/login', login)
+app.post('/adminSignup', adminSignup)
+app.post('/signup', signUp)
+app.get('/getroutes', getRoutes)
+app.post('/addroutes', addRoutes)
+app.post('/addbus', addBus)
+app.get('/getbus', getBus)
+app.get('/deleteroute/:id', deleteRoute)
+app.get('/deletebus/:id', deleteBus)
+app.put('/reserveseat/:id', reserveSeat)
+module.exports = app;
