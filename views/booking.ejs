@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Select Your Seat - Bus Booking</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+</head>
+
+<body class="bg-gray-100 min-h-screen">
+    <!-- Navbar -->
+    <%- include('partials/navbar') %>
+
+        <!-- Main Content -->
+        <div class="container mx-auto p-6 mt-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+            <!-- Seat Grid -->
+            <div class="lg:col-span-2">
+                <h2 class="text-xl font-semibold mb-4">Select Your Seat</h2>
+                <div class="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-12 gap-4">
+                    <% if (bus && bus.seatsAvailable && bus.seatsAvailable.length> 0) { %>
+                        <% bus.seatsAvailable.forEach(seat=> { %>
+                            <button data-seat="<%= seat.seatNumber %>" class=" openModalBtn flex inline-flex gap-1 rounded-lg shadow-md p-2 text-sm font-semibold
+                          <% if (seat.isReserved) { %>
+                            bg-gray-200 text-red-600 border-2 border-red-500 cursor-not-allowed
+                          <% } else { %>
+                            bg-white text-gray-800 hover:bg-green-500 hover:text-white transition duration-200 cursor-pointer
+                          <% } %>" <%=seat.isReserved ? 'disabled' : '' %>
+                                >
+                                <i class="fa-solid fa-chair"></i>
+                                <%= seat.seatNumber %>
+                            </button>
+                            <% }); %>
+                                <% } else { %>
+                                    <p>No seats available.</p>
+                                    <% } %>
+                </div>
+            </div>
+
+
+            <div class="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md border border-gray-200">
+                <h2 class="text-2xl font-bold mb-4 text-gray-800 flex items-center space-x-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 8c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zM12 22c4.97 0 9-4.03 9-9 0-1.79-.55-3.44-1.48-4.79M3.6 12A8.4 8.4 0 0 1 12 3.6M12 6a6 6 0 0 0-6 6c0 2.5 1.5 4.5 3 5.5" />
+                    </svg>
+                    <span>Trip Summary</span>
+                </h2>
+
+                <div class="grid grid-cols-2 gap-4 text-gray-700">
+                    <div class="flex items-center space-x-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-500" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 8l7.89 5.26a2 2 0 0 0 2.22 0L21 8m-18 8h18" />
+                        </svg>
+                        <span class="font-semibold">From:</span>
+                    </div>
+                    <div>
+                        <%= route.origin %>
+                    </div>
+
+                    <div class="flex items-center space-x-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-500" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 8l-7.89 5.26a2 2 0 0 1-2.22 0L3 8m18 8H3" />
+                        </svg>
+                        <span class="font-semibold">To:</span>
+                    </div>
+                    <div>
+                        <%= route.destination %>
+                    </div>
+
+                    <div class="flex items-center space-x-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-500" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3" />
+                        </svg>
+                        <span class="font-semibold">Departure:</span>
+                    </div>
+                    <div>
+                        <%= route.startingTime %>
+                    </div>
+
+                    <div class="flex items-center space-x-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-500" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l-3 3" />
+                        </svg>
+                        <span class="font-semibold">Arrival:</span>
+                    </div>
+                    <div>
+                        <%= route.arrivingTime %>
+                    </div>
+
+                    <div class="flex items-center space-x-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-500" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 8c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14v4" />
+                        </svg>
+                        <span class="font-semibold">Price:</span>
+                    </div>
+                    <div>
+                        <%= route.price %>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+        <!-- Modal backdrop -->
+        <div id="paymentModal" class="fixed inset-0 bg-opacity-50 flex items-center justify-center hidden">
+            <div class="bg-white rounded-lg p-6 w-80 shadow-lg relative">
+                <button id="closeModal"
+                    class="absolute top-2 right-3 text-gray-500 hover:text-gray-900 text-xl font-bold">&times;</button>
+                <h2 class="text-xl font-bold mb-2">Payment</h2>
+
+                <p class="mb-2">You are about to pay for and book seat <span id="modalSeatNumber"
+                        class="font-semibold"></span>.</p>
+
+                <div class="mb-4 text-sm">
+                    <p><strong>From:</strong>
+                        <%=route.origin%>
+                    </p>
+                    <p><strong>To:</strong>
+                        <%=route.destination%>
+                    </p>
+                    <p><strong>Departure:</strong>
+                        <%=route.startingTime%>
+                    </p>
+                    <p><strong>Arrival:</strong>
+                        <%=route.arrivingTime%>
+                    </p>
+                    <p><strong>Price:</strong>
+                        <%=route.price%>
+                    </p>
+                </div>
+                <form action="/reserveseat/<%=route.bus._id%>" method="post" id="paymentForm" class="space-y-4">
+                    <input type="text" value="" id="input" name="seatNumber">
+                    <input type="text" name="cardNumber" placeholder="Card Number" required
+                        class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500" />
+                    <button type="submit"
+                        class="w-full bg-red-500 text-white py-2 rounded hover:bg-red-600 transition">Pay</button>
+                </form>
+            </div>
+        </div>
+
+
+
+        <%- include('partials/footer') %>
+
+</body>
+<script>
+    let input = document.getElementById('input');
+    const modal = document.getElementById('paymentModal');
+    const closeModalBtn = document.getElementById('closeModal');
+    const openModalBtns = document.querySelectorAll('.openModalBtn');
+
+    openModalBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const seatNumber = btn.getAttribute('data-seat');
+            document.getElementById('modalSeatNumber').textContent = seatNumber;
+            input.value = seatNumber
+            modal.classList.remove('hidden');
+        });
+    });
+
+    closeModalBtn.addEventListener('click', () => {
+        modal.classList.add('hidden');
+    });
+
+    // Optional: Close modal when clicking outside modal content
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.classList.add('hidden');
+        }
+    });
+
+    // // Optional: handle form submit
+    // document.getElementById('paymentForm').addEventListener('submit', (e) => {
+    //     e.preventDefault();
+    //     alert('Payment submitted!');
+    //     modal.classList.add('hidden');
+    // });
+</script>
+
+</html>

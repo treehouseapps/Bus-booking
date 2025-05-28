@@ -1,23 +1,39 @@
 const routeModel = require('../models/routeModel')
+const busModel = require('../models/busModel')
 
 const getRoutes = async (req, res) => {
     try {
-        let result = await routeModel.find()
+        let result = await routeModel.find().populate('bus')
             .sort('origin')
-        if (result.length < 1)
-            result = 'empty'
-        res.json({ message: 'Route list page', result })
+        res.render('index', { routes: result })
+        // res.json({ message: 'Route list page', result })
     } catch (error) {
         console.log(error)
         return
     }
 }
+
+
 const addRoutes = async (req, res) => {
-    const data = req.body
     try {
-        const result = await routeModel.create(data)
+        const busExists = await busModel.findById(req.body.bus);
+        if (!busExists) {
+            return res.status(400).send('Invalid bus selected');
+        }
+
+        const result = await routeModel.create(req.body);
+        res.redirect('/');
+    } catch (error) {
+        console.log('error : ' + error);
+        res.status(500).send('Server error');
+    }
+};
+
+const addItems = async (req, res) => {
+    try {
+        const result = await busModel.find()
         if (result) {
-            return res.status(200).json({ message: 'added successfully', data: result });
+            res.render('addItems', { buses: result })
         }
     } catch (error) {
         console.log('error : ' + error)
@@ -35,4 +51,4 @@ const deleteRoute = async (req, res) => {
         return
     }
 }
-module.exports = { getRoutes, addRoutes, deleteRoute }
+module.exports = { getRoutes, addRoutes, addItems, deleteRoute }

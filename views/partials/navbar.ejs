@@ -1,0 +1,21 @@
+<nav class="bg-white shadow py-5 px-15 flex items-center justify-between">
+    <div class="text-xl font-bold">Bus Booking</div>
+    <ul class="flex gap-8 items-center">
+        <li><a href="/" class="hover:scale-105 transition duration-200">Home</a></li>
+        <li><a href="/services" class="hover:scale-105 transition duration-200">Service</a></li>
+        <li><a href="/tickets" class="hover:scale-105 transition duration-200">Tickets</a></li>
+        <li><a href="/admin" class="hover:scale-105 transition duration-200">About</a></li>
+        <li>
+            <a href="/login"
+                class="bg-red-500 text-white px-4 py-2 rounded hover:scale-105 transition duration-300">Login</a>
+        </li>
+        <% if (session && session.user) { %>
+            <span class="border p-1 grid grid-cols-1 text-gray-800 font-semibold">
+                <p>Welcome</p>
+                <p>
+                    <%= session.user.name %>
+                </p>
+            </span>
+            <% } %>
+    </ul>
+</nav>

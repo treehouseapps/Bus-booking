@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up - Bus Booking</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-100 min-h-screen">
+
+    <!-- Navbar -->
+    <%- include('partials/navbar') %>
+
+        <!-- Main Form Container -->
+        <div class="flex justify-center items-center h-[85vh]">
+            <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+                <div class="flex justify-between mb-6">
+                    <button id="toggleRoute" class="font-semibold text-gray-600 hover:underline">Add Route</button>
+                    <button id="toggleBus" class="font-semibold text-gray-600 hover:underline">Add Bus</button>
+                </div>
+
+                <!-- Route Form -->
+                <form id="routeForm" action="/addroutes" method="POST" class="space-y-4">
+                    <h2 class="text-xl font-bold text-center mb-4">Add Route</h2>
+                    <div class="flex inline-flex gap-4">
+                        <div class="flex items-center border rounded px-3 py-2 bg-gray-50">
+                            <i class="bi bi-geo-alt text-gray-500 mr-2"></i>
+                            <select name="origin" id="origin" required class="w-full bg-transparent focus:outline-none">
+                                <option value="Addis Abeba">Addis Abeba</option>
+                                <option value="Bahirdar">Bahirdar</option>
+                                <option value="Hawassa">Hawassa</option>
+                                <option value="Debremarkos">Debremarkos</option>
+                            </select>
+                        </div>
+                        <div class="flex items-center border rounded px-3 py-2 bg-gray-50">
+                            <i class="bi bi-geo text-gray-500 mr-2"></i>
+                            <select name="destination" id="destination" required
+                                class="w-full bg-transparent focus:outline-none">
+                                <option value="Addis Abeba">Addis Abeba</option>
+                                <option value="Bahirdar">Bahirdar</option>
+                                <option value="Hawassa">Hawassa</option>
+                                <option value="Debremarkos">Debremarkos</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="flex inline-flex gap-4">
+                        <div class="flex items-center border rounded px-3 py-2 bg-gray-50">
+                            <i class="bi bi-bus-front text-gray-500 mr-2"></i>
+                            <select name="bus" required>
+                                <% buses.forEach(bus=> { %>
+                                    <option value="<%= bus._id %>">
+                                        <%= bus.busType %>
+                                    </option>
+                                    <% }) %>
+                            </select>
+
+                        </div>
+                        <div class="flex items-center border rounded px-3 py-2 bg-gray-50">
+                            <i class="bi bi-rulers text-gray-500 mr-2"></i>
+                            <input name="km" type="number" placeholder="Distance (Km)" required
+                                class="w-full bg-transparent focus:outline-none" />
+                        </div>
+                    </div>
+                    <div class="flex items-center border rounded px-3 py-2 bg-gray-50">
+                        <i class="bi bi-currency-dollar text-gray-500 mr-2"></i>
+                        <input name="price" type="number" placeholder="Price" required
+                            class="w-full bg-transparent focus:outline-none" />
+                    </div>
+                    <div class="flex items-center border rounded px-3 py-2 bg-gray-50">
+                        <i class="bi bi-clock text-gray-500 mr-2"></i>
+                        <input name="startingTime" type="time" required
+                            class="w-full bg-transparent focus:outline-none" />
+                    </div>
+                    <div class="flex items-center border rounded px-3 py-2 bg-gray-50">
+                        <i class="bi bi-clock-history text-gray-500 mr-2"></i>
+                        <input name="arrivingTime" type="time" required
+                            class="w-full bg-transparent focus:outline-none" />
+                    </div>
+                    <button type="submit"
+                        class="w-full bg-red-500 text-white py-2 rounded hover:scale-105 transition duration-300">
+                        Submit Route
+                    </button>
+                </form>
+
+                <!-- Bus Form -->
+                <form id="busForm" action="/addbus" method="POST" class="space-y-4 hidden">
+                    <h2 class="text-xl font-bold text-center mb-4">Add Bus</h2>
+                    <div class="flex items-center border rounded px-3 py-2 bg-gray-50">
+                        <i class="bi bi-bus-front text-gray-500 mr-2"></i>
+                        <select name="busType" id="busType" required class="w-full bg-transparent focus:outline-none">
+                            <option value="Airbus">Airbus</option>
+                            <option value="Higer">Higer</option>
+                            <option value="Yutong">Yutong</option>
+                            <option value="Tata Starbus">Tata Starbus</option>
+                        </select>
+                    </div>
+                    <div class="flex items-center border rounded px-3 py-2 bg-gray-50">
+                        <i class="bi bi-grid-1x2 text-gray-500 mr-2"></i>
+                        <input name="seatCount" type="number" placeholder="Total Seats" required
+                            class="w-full bg-transparent focus:outline-none" />
+                    </div>
+                    <p class="text-sm text-gray-500 -mt-3 mb-2">Seats will auto-generate from 1 to N</p>
+                    <button type="submit" class="w-full bg-red-500 text-white py-2 rounded hover:scale-105 transition">
+                        Submit Bus
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <%- include('partials/footer') %>
+
+            <!-- Toggle Script -->
+            <script>
+                const routeForm = document.getElementById('routeForm');
+                const busForm = document.getElementById('busForm');
+                document.getElementById('toggleRoute').addEventListener('click', () => {
+                    routeForm.classList.remove('hidden');
+                    busForm.classList.add('hidden');
+                });
+                document.getElementById('toggleBus').addEventListener('click', () => {
+                    busForm.classList.remove('hidden');
+                    routeForm.classList.add('hidden');
+                });
+            </script>
+</body>
+
+</html>

@@ -35,8 +35,14 @@ Content-Type: application/json
 # }
 ###
 # GET ALL Users
-GET http://localhost:3000/getusers/
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODAyODY5OTFmMmQ2MGIwYjMyNTI5M2EiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NDQ5OTk2NDIsImV4cCI6MTc0NTAwMzI0Mn0.54-LKSsCDFw1a4asyZx0jO61UVka6nOsKQWqVefHcSs
+GET http://localhost:3000/users/
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODAyODY5OTFmMmQ2MGIwYjMyNTI5M2EiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NDQ5OTk2NDIsImV4cCI6MTc0NTAwMzI0Mn0.54-LKSsCDFw1a4asyZx0jO61UVka6nOsKQWqVefHcSs
+
+###
+
+# Delete user by id
+GET http://localhost:3000/delete/682ad9ff5cb72066cfb0d733
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODAyODY5OTFmMmQ2MGIwYjMyNTI5M2EiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NDQ5OTk2NDIsImV4cCI6MTc0NTAwMzI0Mn0.54-LKSsCDFw1a4asyZx0jO61UVka6nOsKQWqVefHcSs
 
 ####
 PUT http://localhost:3000/reserveseat/6828e46fabe75f3677acdca5
