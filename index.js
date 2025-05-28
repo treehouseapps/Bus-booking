@@ -6,7 +6,7 @@ const routes = require('./routes/routes')
 const connection = require('./config/connection')
 const session = require('express-session');
 
-
+app.use(express.static('public'));
 app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,

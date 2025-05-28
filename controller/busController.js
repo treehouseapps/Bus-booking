@@ -5,16 +5,18 @@ const booking = async (req, res) => {
     try {
         const routeId = req.params.id
         const route = await routeModel.findById(routeId)
+        if (!route) {
+            return res.status(404).send('Route not found')
+        }
+        const busType = route.busType
 
-        // if (!route) {
-        //     return res.status(404).send('Route not found')
-        // }
-        // const bus = route.bus
-
+        const bus = await busModel.find({ busType, status: 'available' })
+        if (bus.length === 0) {
+            return res.status(404).send('No available buses of this type');
+        }
         res.render('booking', {
-            seatCount: bus.seatsAvailable.length,
             route,
-            bus
+            bus: bus[0]
         })
     } catch (error) {
         console.log(error)
@@ -32,10 +34,10 @@ const getBus = async (req, res) => {
 }
 const addBus = async (req, res) => {
     const createBus = async () => {
-        const { totalSeats, busType, status } = req.body
+        const { seatCount, busType, status } = req.body
         const seats = [];
 
-        for (let i = 1; i <= totalSeats; i++) {
+        for (let i = 1; i <= seatCount; i++) {
             seats.push({
                 seatNumber: i,
                 isReserved: false,
@@ -51,7 +53,7 @@ const addBus = async (req, res) => {
 
         try {
             await newBus.save();
-            res.redirect('/')
+            res.redirect('/admin/bus')
         } catch (err) {
             console.error('Error creating bus:', err.message);
         }
@@ -70,7 +72,6 @@ const deleteBus = async (req, res) => {
     }
 }
 const reserveSeat = async (req, res) => {
-    console.log(req.params.id, req.body.seatNumber)
     const busId = req.params.id
     const tempSeat = req.body.seatNumber
     const card = req.body.cardNumber
@@ -91,7 +92,8 @@ const reserveSeat = async (req, res) => {
         const isBusFull = bus.seatsAvailable.every(seat => seat.isReserved);
 
         if (isBusFull) {
-            console.log('full')
+            bus.status = 'full';
+            await bus.save();
         }
 
         res.redirect('/')

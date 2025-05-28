@@ -143,7 +143,7 @@
                         <%=route.price%>
                     </p>
                 </div>
-                <form action="/reserveseat/<%=route.bus._id%>" method="post" id="paymentForm" class="space-y-4">
+                <form action="/reserveseat/<%=bus._id%>" method="post" id="paymentForm" class="space-y-4">
                     <input type="text" value="" id="input" name="seatNumber">
                     <input type="text" name="cardNumber" placeholder="Card Number" required
                         class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500" />

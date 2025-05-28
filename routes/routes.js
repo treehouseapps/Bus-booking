@@ -42,8 +42,8 @@ app.get('/delete/:id', async (req, res) => {
     try {
         const id = req.params.id
         // const data = await userModel.findByIdAndDelete(id)
-        const data = await routeModel.findByIdAndDelete(id)
-        // const data = await busModel.findByIdAndDelete(id)
+        // const data = await routeModel.findByIdAndDelete(id)
+        const data = await busModel.findByIdAndDelete(id)
         if (data)
             res.json("Deleted Successfully")
     }
