@@ -3,13 +3,14 @@ const routeModel = require('../models/routeModel')
 
 const booking = async (req, res) => {
     try {
-        const id = req.params.id
-        const route = await routeModel.findById(id).populate('bus')
+        const routeId = req.params.id
+        const route = await routeModel.findById(routeId)
 
-        if (!route) {
-            return res.status(404).send('Route not found')
-        }
-        const bus = route.bus
+        // if (!route) {
+        //     return res.status(404).send('Route not found')
+        // }
+        // const bus = route.bus
+
         res.render('booking', {
             seatCount: bus.seatsAvailable.length,
             route,
@@ -22,7 +23,7 @@ const booking = async (req, res) => {
 }
 const getBus = async (req, res) => {
     try {
-        const data = await busModel.find().sort('name')
+        const data = await busModel.find({ status: 'available' }).sort('name')
         res.render('bus', { data })
     }
     catch {
@@ -30,18 +31,8 @@ const getBus = async (req, res) => {
     }
 }
 const addBus = async (req, res) => {
-    // const { busId, busType, seatsAvailable } = req.body
-    // try {
-    //     const result = await busModel.create({ busId, busType, seatsAvailable })
-    //     if (result) {
-    //         return res.status(200).json({ message: 'added successfully', data: result });
-    //     }
-    // } catch (error) {
-    //     console.log('error : ' + error)
-    //     return
-    // }
     const createBus = async () => {
-        const totalSeats = req.body.seatCount;
+        const { totalSeats, busType, status } = req.body
         const seats = [];
 
         for (let i = 1; i <= totalSeats; i++) {
@@ -53,7 +44,8 @@ const addBus = async (req, res) => {
         }
 
         const newBus = new busModel({
-            busType: req.body.busType,
+            busType,
+            status: 'available',
             seatsAvailable: seats
         });
 
@@ -86,7 +78,6 @@ const reserveSeat = async (req, res) => {
         const bus = await busModel.findById(busId)
         if (!bus) return res.status(404).json({ message: 'Bus not found' });
         const reserve = bus.seatsAvailable.find(seat => {
-            console.log("Comparing:", seat.seatNumber, "===", tempSeat);
             return seat.seatNumber === Number(tempSeat);
         });
         if (!reserve) return res.status(404).json({ message: 'Seat not found' });
@@ -95,6 +86,13 @@ const reserveSeat = async (req, res) => {
         reserve.isReserved = true;
         reserve.reservedBy = req.session.user;
         await bus.save();
+
+        // After saving, check if the bus is now full
+        const isBusFull = bus.seatsAvailable.every(seat => seat.isReserved);
+
+        if (isBusFull) {
+            console.log('full')
+        }
 
         res.redirect('/')
     } catch (error) {

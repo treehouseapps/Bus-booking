@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const routeSchema = new mongoose.Schema({
     origin: { type: String, requird: true },
     destination: { type: String, requird: true },
-    bus: { type: mongoose.Schema.Types.ObjectId, ref: 'bus', required: true },
+    busType: { type: String, requird: true },
     price: { type: Number, required: true },
     km: { type: Number, required: true },
     startingTime: { type: String, required: true },

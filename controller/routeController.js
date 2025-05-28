@@ -3,24 +3,20 @@ const busModel = require('../models/busModel')
 
 const getRoutes = async (req, res) => {
     try {
-        let result = await routeModel.find().populate('bus')
+        let result = await routeModel.find()
             .sort('origin')
+
         res.render('index', { routes: result })
-        // res.json({ message: 'Route list page', result })
+
     } catch (error) {
         console.log(error)
         return
     }
 }
 
-
 const addRoutes = async (req, res) => {
     try {
-        const busExists = await busModel.findById(req.body.bus);
-        if (!busExists) {
-            return res.status(400).send('Invalid bus selected');
-        }
-
+        console.log(req.body)
         const result = await routeModel.create(req.body);
         res.redirect('/');
     } catch (error) {

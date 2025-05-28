@@ -22,7 +22,7 @@
                 </div>
 
                 <!-- Route Form -->
-                <form id="routeForm" action="/addroutes" method="POST" class="space-y-4">
+                <form id="routeForm" action="/admin/addroutes" method="POST" class="space-y-4">
                     <h2 class="text-xl font-bold text-center mb-4">Add Route</h2>
                     <div class="flex inline-flex gap-4">
                         <div class="flex items-center border rounded px-3 py-2 bg-gray-50">
@@ -48,9 +48,9 @@
                     <div class="flex inline-flex gap-4">
                         <div class="flex items-center border rounded px-3 py-2 bg-gray-50">
                             <i class="bi bi-bus-front text-gray-500 mr-2"></i>
-                            <select name="bus" required>
+                            <select name="busType" required>
                                 <% buses.forEach(bus=> { %>
-                                    <option value="<%= bus._id %>">
+                                    <option value="<%= bus.busType %>">
                                         <%= bus.busType %>
                                     </option>
                                     <% }) %>
@@ -85,7 +85,7 @@
                 </form>
 
                 <!-- Bus Form -->
-                <form id="busForm" action="/addbus" method="POST" class="space-y-4 hidden">
+                <form id="busForm" action="/admin/addbus" method="POST" class="space-y-4 hidden">
                     <h2 class="text-xl font-bold text-center mb-4">Add Bus</h2>
                     <div class="flex items-center border rounded px-3 py-2 bg-gray-50">
                         <i class="bi bi-bus-front text-gray-500 mr-2"></i>
