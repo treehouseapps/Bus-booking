@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Your Ticket</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-100 min-h-screen p-6">
+
+    <!-- Navbar -->
+    <%- include('partials/navbar') %>
+        <div class="grid grid-cols-1 gap-6 max-w-4xl mx-auto mt-10">
+            <% tickets.forEach(ticket=> { %>
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-xl font-bold text-red-600"><i class="bi bi-ticket-perforated-fill"></i> Ticket
+                        </h2>
+                        <button onclick="window.print()"
+                            class="text-blue-600 hover:text-blue-800 flex items-center gap-1">
+                            <i class="bi bi-printer"></i> Print
+                        </button>
+                    </div>
+
+                    <div class="border-t border-b py-4 space-y-2 text-gray-800">
+                        <p><strong><i class="bi bi-person"></i> User id:</strong>
+                            <%= ticket.userId%>
+                        </p>
+                        <p><strong><i class="bi bi-person"></i> Name:</strong>
+                            <%= ticket.name %>
+                        </p>
+                        <p><strong><i class="bi bi-bus-front"></i> Bus Type:</strong>
+                            <%= ticket.busType %>
+                        </p>
+                        <p><strong><i class="bi bi-geo-alt-fill"></i> From:</strong>
+                            <%= ticket.origin %>
+                        </p>
+                        <p><strong><i class="bi bi-geo-fill"></i> To:</strong>
+                            <%= ticket.destination %>
+                        </p>
+                        <% if(ticket.seatNumber) { %>
+                            <p><strong><i class="bi bi-grid-fill"></i> Seat Number:</strong>
+                                <%= ticket.seatNumber %>
+                            </p>
+                            <% } %>
+                                <% if(ticket.startingTime && ticket.arrivingTime) { %>
+                                    <p><strong><i class="bi bi-clock"></i> Time:</strong>
+                                        <%= ticket.startingTime %> - <%= ticket.arrivingTime %>
+                                    </p>
+                                    <% } %>
+                                        <% if(ticket.price) { %>
+                                            <p><strong><i class="bi bi-currency-dollar"></i> Price:</strong> $<%=
+                                                    ticket.price %>
+                                            </p>
+                                            <% } %>
+                    </div>
+
+                    <p class="text-gray-500 text-sm mt-2">Issued: <%= ticket.createdAt.toDateString() %>
+                    </p>
+                </div>
+                <% }) %>
+        </div>
+
+        <%- include('partials/footer') %>
+
+</body>
+
+</html>

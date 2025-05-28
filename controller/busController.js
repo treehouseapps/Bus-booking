@@ -1,5 +1,6 @@
 const busModel = require('../models/busModel')
 const routeModel = require('../models/routeModel')
+const ticketModel = require('../models/ticketModel');
 
 const booking = async (req, res) => {
     try {
@@ -95,8 +96,16 @@ const reserveSeat = async (req, res) => {
             bus.status = 'full';
             await bus.save();
         }
+        //addins reports
+        const { name } = req.session.user
+        const { origin, destination, startingTime, arrivingTime, price, km, date, busType, cardNumber, seatNumber } = req.body;
 
-        res.redirect('/')
+        const newTicket = await ticketModel.create({
+            userId: req.session.user._id, name, origin, destination, startingTime, arrivingTime, price, km, date: new Date(), busType, cardNumber, seatNumber
+        });
+
+        res.redirect('/');
+
     } catch (error) {
         console.log(error)
         return

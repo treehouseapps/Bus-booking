@@ -144,6 +144,15 @@
                     </p>
                 </div>
                 <form action="/reserveseat/<%=bus._id%>" method="post" id="paymentForm" class="space-y-4">
+                    <!-- Hidden inputs (same data but submitted in req.body) -->
+                    <input type="hidden" name="origin" value="<%= route.origin %>">
+                    <input type="hidden" name="destination" value="<%= route.destination %>">
+                    <input type="hidden" name="startingTime" value="<%= route.startingTime %>">
+                    <input type="hidden" name="arrivingTime" value="<%= route.arrivingTime %>">
+                    <input type="hidden" name="price" value="<%= route.price %>">
+                    <input type="hidden" name="km" value="<%= route.km %>">
+                    <input type="hidden" name="busType" value="<%= bus.busType %>">
+
                     <input type="text" value="" id="input" name="seatNumber">
                     <input type="text" name="cardNumber" placeholder="Card Number" required
                         class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500" />
@@ -184,12 +193,6 @@
         }
     });
 
-    // // Optional: handle form submit
-    // document.getElementById('paymentForm').addEventListener('submit', (e) => {
-    //     e.preventDefault();
-    //     alert('Payment submitted!');
-    //     modal.classList.add('hidden');
-    // });
 </script>
 
 </html>

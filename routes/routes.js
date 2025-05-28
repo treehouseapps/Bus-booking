@@ -1,11 +1,13 @@
 const express = require('express')
 const userModel = require('../models/userModel')
-const routeModel = require('../models/routeModel')
+const routeController = require('../models/routeModel')
+const ticketModel = require('../models/ticketModel')
 const busModel = require('../models/busModel')
 const app = express()
 const { registerPage, signInPage, adminRegisterPage, adminSignup, login, signUp } = require('../controller/userController')
 const { getRoutes, addRoutes, addItems, deleteRoute } = require('../controller/routeController')
 const { addBus, getBus, booking, deleteBus, reserveSeat } = require('../controller/busController')
+const { getTickets, addTicket } = require('../controller/ticketController')
 
 //user
 app.get('/register', registerPage)
@@ -26,6 +28,8 @@ app.get('/book/:id', booking)
 app.get('/deleteroute/:id', deleteRoute)
 app.get('/deletebus/:id', deleteBus)
 app.post('/reserveseat/:id', reserveSeat)
+app.get('/tickets', getTickets)
+app.post('/addreport', addTicket)
 app.get('/admin', (req, res) => {
     res.render('adminDashboard')
 })
