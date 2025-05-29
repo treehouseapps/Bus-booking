@@ -1,6 +1,11 @@
 const ticketModel = require('../models/ticketModel');
 
 const getTickets = async (req, res) => {
+    if (!req.session.user) {
+        res.redirect('/login')
+        return
+    }
+
     try {
         const tickets = await ticketModel.find({ userId: req.session.user._id });
         res.render('ticket', { tickets });
@@ -10,6 +15,11 @@ const getTickets = async (req, res) => {
     }
 };
 const addTicket = async (req, res) => {
+    if (!req.session.user) {
+        res.redirect('/login')
+        return
+    }
+
     try {
         const { userId, name } = req.session.user
         consol.log(req.session.user)
@@ -20,7 +30,10 @@ const addTicket = async (req, res) => {
             userId, name, origin, destination, startingTime, arrivingTime, price, km, date, busType
         });
 
-        res.redirect('/');
+        res
+            .res.redirect('/');
+
+        return
     } catch (error) {
         console.error('Error creating ticket:', error.message);
         res.status(500).send('Server error');

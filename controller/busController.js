@@ -4,6 +4,10 @@ const ticketModel = require('../models/ticketModel');
 
 const booking = async (req, res) => {
     try {
+        if (!req.session.user) {
+            res.redirect('/login')
+            return
+        }
         const routeId = req.params.id
         const route = await routeModel.findById(routeId)
         if (!route) {
@@ -25,15 +29,25 @@ const booking = async (req, res) => {
     }
 }
 const getBus = async (req, res) => {
+    if (!req.session.user) {
+        res.redirect('/login')
+        return
+    }
+
     try {
         const data = await busModel.find({ status: 'available' }).sort('name')
-        res.render('bus', { data })
+        res.render('bus', { data, session: req.session.user.role })
     }
     catch {
         res.json('empty')
     }
 }
 const addBus = async (req, res) => {
+    if (!req.session.user || req.session.user.role !== 'admin') {
+        res.redirect('/login')
+        return
+    }
+
     const createBus = async () => {
         const { seatCount, busType, status } = req.body
         const seats = [];
@@ -62,10 +76,18 @@ const addBus = async (req, res) => {
     createBus()
 }
 const deleteBus = async (req, res) => {
+    if (!req.session.user || req.session.user.role !== 'admin') {
+        res.redirect('/login')
+        return
+    }
+
     const busId = req.params.id
     try {
         const result = await busModel.findByIdAndDelete(busId)
-        if (result) { console.log('success') }
+        if (result) {
+            res.redirect('/admin/bus')
+            return
+        }
         else { console.log('not working') }
     } catch (error) {
         console.log(error)
@@ -73,6 +95,11 @@ const deleteBus = async (req, res) => {
     }
 }
 const reserveSeat = async (req, res) => {
+    if (!req.session.user || req.session.user.role !== 'admin') {
+        res.redirect('/login')
+        return
+    }
+
     const busId = req.params.id
     const tempSeat = req.body.seatNumber
     const card = req.body.cardNumber
@@ -98,10 +125,10 @@ const reserveSeat = async (req, res) => {
         }
         //addins reports
         const { name } = req.session.user
-        const { origin, destination, startingTime, arrivingTime, price, km, date, busType, cardNumber, seatNumber } = req.body;
+        const { origin, destination, startingTime, arrivingTime, price, km, busType, cardNumber, seatNumber } = req.body;
 
         const newTicket = await ticketModel.create({
-            userId: req.session.user._id, name, origin, destination, startingTime, arrivingTime, price, km, date: new Date(), busType, cardNumber, seatNumber
+            userId: req.session.user._id, name, origin, destination, startingTime, arrivingTime, price, km, date: new Date(), busType, cardNumber: card, seatNumber
         });
 
         res.redirect('/');

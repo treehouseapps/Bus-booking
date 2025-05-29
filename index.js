@@ -29,6 +29,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use('/', routes)
+app.use((req, res) => {
+    res.redirect('/');
+});
 app.use(cors)
 app.listen(process.env.PORT, () => {
     console.log(`backend server running in port ${process.env.PORT}....`)

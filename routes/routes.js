@@ -25,8 +25,8 @@ app.post('/admin/addroutes', addRoutes)
 app.post('/admin/addbus', addBus)
 app.get('/admin/bus', getBus)
 app.get('/book/:id', booking)
-app.get('/deleteroute/:id', deleteRoute)
-app.get('/deletebus/:id', deleteBus)
+app.get('/admin/deleteroute/:id', deleteRoute)
+app.get('/admin/deletebus/:id', deleteBus)
 app.post('/reserveseat/:id', reserveSeat)
 app.get('/tickets', getTickets)
 app.post('/addreport', addTicket)
@@ -45,14 +45,14 @@ app.get('/admin/users', async (req, res) => {
 app.get('/delete/:id', async (req, res) => {
     try {
         const id = req.params.id
-        // const data = await userModel.findByIdAndDelete(id)
-        // const data = await routeModel.findByIdAndDelete(id)
-        const data = await busModel.findByIdAndDelete(id)
+        const data = await userModel.findByIdAndDelete(id)
         if (data)
-            res.json("Deleted Successfully")
+            res.redirect('/admin/users')
     }
     catch {
         res.json('Can not delete user')
     }
 })
+
+
 module.exports = app;

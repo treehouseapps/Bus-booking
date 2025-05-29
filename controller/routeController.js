@@ -6,7 +6,7 @@ const getRoutes = async (req, res) => {
         let result = await routeModel.find()
             .sort('origin')
 
-        res.render('index', { routes: result })
+        res.render('index', { routes: result, session: req.session.role })
 
     } catch (error) {
         console.log(error)
@@ -15,8 +15,12 @@ const getRoutes = async (req, res) => {
 }
 
 const addRoutes = async (req, res) => {
+    if (!req.session.user || req.session.user.role !== 'admin') {
+        res.redirect('/login')
+        return
+    }
+
     try {
-        console.log(req.body)
         const result = await routeModel.create(req.body);
         res.redirect('/');
     } catch (error) {
@@ -26,6 +30,11 @@ const addRoutes = async (req, res) => {
 };
 
 const addItems = async (req, res) => {
+    if (!req.session.user || req.session.user.role !== 'admin') {
+        res.redirect('/login')
+        return
+    }
+
     try {
         const result = await busModel.find()
         if (result) {
@@ -37,10 +46,18 @@ const addItems = async (req, res) => {
     }
 }
 const deleteRoute = async (req, res) => {
+    if (!req.session.user || req.session.user.role !== 'admin') {
+        res.redirect('/login')
+        return
+    }
+
     const routeId = req.params.id
     try {
         const result = await routeModel.findByIdAndDelete(routeId)
-        if (result) { console.log('success') }
+        if (result) {
+            res.redirect('/')
+            return
+        }
         else { console.log('not working') }
     } catch (error) {
         console.log(error)
