@@ -53,6 +53,19 @@ app.get('/delete/:id', async (req, res) => {
         res.json('Can not delete user')
     }
 })
+app.get('/destroy', async (req, res) => {
+    try {
+        req.session.destroy(err => {
+            if (err) {
+                return res.status(500).send('Failed to log out.');
+            }
+            res.redirect('/login');
+        });
+    }
+    catch {
+        res.json('Can not clear session')
+    }
+})
 
 
 module.exports = app;

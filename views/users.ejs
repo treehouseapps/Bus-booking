@@ -21,28 +21,28 @@
                     <div class="m-10 grid grid-cols-4 gap-4">
                         <%data.map((item)=>{%>
                             <div class="relative p-4 pb-2 border border-gray-500 rounded-lg shadow">
-                                <!-- 🗑️ Delete Icon Button in Top-Right -->
-                                <form action="/delete/<%= item._id %>" method="get" class="absolute top-2 right-2">
-                                    <button type="submit" title="Delete"
-                                        class="text-red-500 hover:text-red-700 transition">
-                                        <i class="bi bi-trash-fill"></i>
-                                    </button>
-                                </form>
-
-                                <ul>
-                                    <p class="p-2 text-gray-500">
-                                        <%= item._id %>
-                                    </p>
-                                    <p class="p-2">
-                                        NAME: <%= item.name %>
-                                    </p>
-                                    <p class="p-2">
-                                        EMAIL: <%= item.email %>
-                                    </p>
-                                    <p class="font-semibold p-2">
-                                        <%= item.role %>
-                                    </p>
-                                </ul>
+                                <%if(session=='admin' ){%>
+                                    <form action="/delete/<%= item._id %>" method="get" class="absolute top-2 right-2">
+                                        <button type="submit" title="Delete"
+                                            class="text-red-500 hover:text-red-700 transition">
+                                            <i class="bi bi-trash-fill"></i>
+                                        </button>
+                                    </form>
+                                    <%}%>
+                                        <ul>
+                                            <p class="p-2 text-gray-500">
+                                                <%= item._id %>
+                                            </p>
+                                            <p class="p-2">
+                                                NAME: <%= item.name %>
+                                            </p>
+                                            <p class="p-2">
+                                                EMAIL: <%= item.email %>
+                                            </p>
+                                            <p class="font-semibold p-2">
+                                                <%= item.role %>
+                                            </p>
+                                        </ul>
                             </div>
 
                             <%})%>

@@ -22,53 +22,55 @@
                     <div class="m-30 grid grid-cols-3 gap-4">
                         <% routes.forEach(route=> { %>
                             <div class="p-4 pb-2 border border-gray-500 rounded-lg shadow">
-                                <!-- Delete Icon -->
-                                <form action="/admin/deleteroute/<%= route._id %>" method="get" class="float-right">
-                                    <button type="submit" title="Delete Bus"
-                                        class="text-red-600 hover:text-red-800 text-lg">
-                                        <i class="bi bi-trash-fill"></i>
-                                    </button>
-                                </form>
-                                <ul>
-                                    <div class="flex mb-2 justify-between items-center gap-4">
-                                        <div class="flexinline-flex">
-                                            <p class="text-gray-700 text-sm">From:</p><span class="font-semibold">
-                                                <%= route.origin %>
-                                            </span>
-                                        </div>
-                                        <div>
-                                            <p
-                                                class="border border-gray-400 rounded-xl p-1 px-3 inline-block text-gray-700">
-                                                <%= route.km %> KM
-                                            </p>
-                                        </div>
+                                <%if(session=='admin'){ %>
+                                    <form action="/admin/deleteroute/<%= route._id %>" method="get" class="float-right">
+                                        <button type="submit" title="Delete Bus"
+                                            class="text-red-600 hover:text-red-800 text-lg">
+                                            <i class="bi bi-trash-fill"></i>
+                                        </button>
+                                    </form>
+                                    <%}%>
+                                        <ul>
+                                            <div class="flex mb-2 justify-between items-center gap-4">
+                                                <div class="flexinline-flex">
+                                                    <p class="text-gray-700 text-sm">From:</p><span
+                                                        class="font-semibold">
+                                                        <%= route.origin %>
+                                                    </span>
+                                                </div>
+                                                <div>
+                                                    <p
+                                                        class="border border-gray-400 rounded-xl p-1 px-3 inline-block text-gray-700">
+                                                        <%= route.km %> KM
+                                                    </p>
+                                                </div>
 
-                                        <div class="flexinline-flex">
-                                            <p class="text-gray-700 text-sm">To:</p><span class="font-semibold">
-                                                <%= route.destination %>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="flex justify-between">
-                                        <div class="flex gap-2">
-                                            wifi<i class="bi bi-wifi"></i>
-                                            Display<i class="bi bi-display"></i>
-                                            <%= route.busType%><i class="bi bi-bus-front mr-2"></i>
-                                        </div>
-                                        <p class="text-gray-700 text-sm mb-5 text-center">
-                                            <%= route.startingTime %> - <%= route.arrivingTime %>
-                                        </p>
-                                    </div>
-                                    <div class="flex justify-between">
+                                                <div class="flexinline-flex">
+                                                    <p class="text-gray-700 text-sm">To:</p><span class="font-semibold">
+                                                        <%= route.destination %>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="flex justify-between">
+                                                <div class="flex gap-2">
+                                                    wifi<i class="bi bi-wifi"></i>
+                                                    Display<i class="bi bi-display"></i>
+                                                    <%= route.busType%><i class="bi bi-bus-front mr-2"></i>
+                                                </div>
+                                                <p class="text-gray-700 text-sm mb-5 text-center">
+                                                    <%= route.startingTime %> - <%= route.arrivingTime %>
+                                                </p>
+                                            </div>
+                                            <div class="flex justify-between">
 
-                                        <p class="font-bold text-lg">$ <%= route.price %>
-                                        </p>
-                                        <a href="/book/<%= route._id %>"
-                                            class="p-5 pl-8 pr-8 block text-center text-white hover:scale-105 transition duration-300 bg-red-500 rounded-lg py-2">
-                                            Rererve Seat
-                                        </a>
-                                    </div>
-                                </ul>
+                                                <p class="font-bold text-lg">$ <%= route.price %>
+                                                </p>
+                                                <a href="/book/<%= route._id %>"
+                                                    class="p-5 pl-8 pr-8 block text-center text-white hover:scale-105 transition duration-300 bg-red-500 rounded-lg py-2">
+                                                    Rererve Seat
+                                                </a>
+                                            </div>
+                                        </ul>
                             </div>
                             <% }) %>
                     </div>
