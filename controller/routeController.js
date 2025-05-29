@@ -38,7 +38,7 @@ const addItems = async (req, res) => {
     try {
         const result = await busModel.find()
         if (result) {
-            res.render('addItems', { buses: result })
+            res.render('addItems', { buses: result, session: req.session.user ? req.session.user : null })
         }
     } catch (error) {
         console.log('error : ' + error)

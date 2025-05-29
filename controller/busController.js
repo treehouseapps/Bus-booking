@@ -21,7 +21,8 @@ const booking = async (req, res) => {
         }
         res.render('booking', {
             route,
-            bus: bus[0]
+            bus: bus[0],
+            session: req.session.user ? req.session.user : null
         })
     } catch (error) {
         console.log(error)

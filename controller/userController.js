@@ -2,13 +2,13 @@ const bcrypt = require("bcryptjs");
 const userModel = require('../models/userModel')
 
 const signInPage = (req, res) => {
-    res.render('login')
+    res.render('login', { session: req.session.user ? req.session.user : null })
 }
 const registerPage = (req, res) => {
-    res.render('register')
+    res.render('register', { session: req.session.user ? req.session.user : null })
 }
 const adminRegisterPage = (req, res) => {
-    res.render('adminRegister')
+    res.render('adminRegister', { session: req.session.user ? req.session.user : null })
 }
 // Admin signup logic
 const adminSignup = async (req, res) => {

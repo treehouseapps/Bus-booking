@@ -28,7 +28,7 @@ app.post('/reserveseat/:id', reserveSeat)
 app.get('/tickets', getTickets)
 app.post('/addreport', addTicket)
 app.get('/admin', (req, res) => {
-    res.render('adminDashboard')
+    res.render('adminDashboard', { session: req.session.user ? req.session.user : null })
 })
 app.get('/admin/users', async (req, res) => {
     try {

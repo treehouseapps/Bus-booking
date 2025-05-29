@@ -5,20 +5,30 @@
         <li><a href="/services" class="hover:scale-105 transition duration-200">Service</a></li>
         <li><a href="/tickets" class="hover:scale-105 transition duration-200">Tickets</a></li>
         <li><a href="/admin" class="hover:scale-105 transition duration-200">About</a></li>
-        <li>
-            <a href="/login"
-                class="bg-red-500 text-white px-4 py-2 rounded hover:scale-105 transition duration-300">Login</a>
-        </li>
-        <% if (session ) { %>
-            <span class="border p-1 grid grid-cols-1 text-gray-800 font-semibold">
-                <p>Welcome</p>
-                <p>
-                    <%=session%>
-                        <pre><%= JSON.stringify(session, null, 2) %></pre>
 
+        <% if (session && session.name) { %>
+            <li>
+                <div
+                    class="flex items-center space-x-3 bg-gray-100 px-3 py-1 rounded-full shadow text-gray-800 font-medium">
+                    <span>
                         <%= session.name %>
-                </p><a class="border border-red-500 rounded-lg p-1 text-center" href="/destroy">Logout</a>
-            </span>
-            <% } %>
+                    </span>
+                    <a href="/destroy"
+                        class="text-red-500 hover:text-red-700 text-sm border border-red-500 px-2 py-1 rounded-lg">
+                        Logout
+                    </a>
+                    <div class="w-8 h-8 rounded-full bg-gray-400 flex items-center justify-center text-white text-sm">
+                        <i class="bi bi-person-fill"></i>
+                    </div>
+                </div>
+            </li>
+            <% } else { %>
+                <li>
+                    <a href="/login"
+                        class="bg-red-500 text-white px-4 py-2 rounded hover:scale-105 transition duration-300">
+                        Login
+                    </a>
+                </li>
+                <% } %>
     </ul>
 </nav>
