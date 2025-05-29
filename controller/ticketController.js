@@ -8,7 +8,7 @@ const getTickets = async (req, res) => {
 
     try {
         const tickets = await ticketModel.find({ userId: req.session.user._id });
-        res.render('ticket', { tickets });
+        res.render('ticket', { tickets, session: req.session.user ? req.session.user : null });
     } catch (error) {
         console.error("Error fetching tickets:", error);
         res.status(500).send("Server error");

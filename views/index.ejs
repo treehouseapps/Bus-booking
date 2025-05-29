@@ -22,7 +22,7 @@
                     <div class="m-30 grid grid-cols-3 gap-4">
                         <% routes.forEach(route=> { %>
                             <div class="p-4 pb-2 border border-gray-500 rounded-lg shadow">
-                                <%if(session=='admin'){ %>
+                                <%if(session && session.role=='admin' ){ %>
                                     <form action="/admin/deleteroute/<%= route._id %>" method="get" class="float-right">
                                         <button type="submit" title="Delete Bus"
                                             class="text-red-600 hover:text-red-800 text-lg">

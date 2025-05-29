@@ -1,8 +1,5 @@
 const express = require('express')
 const userModel = require('../models/userModel')
-const routeController = require('../models/routeModel')
-const ticketModel = require('../models/ticketModel')
-const busModel = require('../models/busModel')
 const app = express()
 const { registerPage, signInPage, adminRegisterPage, adminSignup, login, signUp } = require('../controller/userController')
 const { getRoutes, addRoutes, addItems, deleteRoute } = require('../controller/routeController')
@@ -36,7 +33,7 @@ app.get('/admin', (req, res) => {
 app.get('/admin/users', async (req, res) => {
     try {
         const data = await userModel.find().sort('role')
-        res.render('users', { data })
+        res.render('users', { data, session: req.session.user ? req.session.user : null })
     }
     catch {
         res.json('empty')

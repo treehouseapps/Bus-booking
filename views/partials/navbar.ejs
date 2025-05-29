@@ -9,13 +9,15 @@
             <a href="/login"
                 class="bg-red-500 text-white px-4 py-2 rounded hover:scale-105 transition duration-300">Login</a>
         </li>
-        <% if (session && session.user) { %>
+        <% if (session ) { %>
             <span class="border p-1 grid grid-cols-1 text-gray-800 font-semibold">
                 <p>Welcome</p>
                 <p>
-                    <%= session.user.name %>
-                </p>
-                <button class="p-1">Logout</button>
+                    <%=session%>
+                        <pre><%= JSON.stringify(session, null, 2) %></pre>
+
+                        <%= session.name %>
+                </p><a class="border border-red-500 rounded-lg p-1 text-center" href="/destroy">Logout</a>
             </span>
             <% } %>
     </ul>

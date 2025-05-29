@@ -22,7 +22,7 @@
                     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                         <% data.forEach(bus=> { %>
                             <div class="bg-white p-4 rounded shadow relative">
-                                <%if(session=='admin' ){%>
+                                <%if(session && session.role=='admin' ){%>
                                     <form action="/admin/deletebus/<%= bus._id %>" method="get"
                                         class="absolute top-2 right-2">
                                         <button type="submit" title="Delete Bus"

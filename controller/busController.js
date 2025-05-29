@@ -36,7 +36,7 @@ const getBus = async (req, res) => {
 
     try {
         const data = await busModel.find({ status: 'available' }).sort('name')
-        res.render('bus', { data, session: req.session.user.role })
+        res.render('bus', { data, session: req.session.user ? req.session.user : null })
     }
     catch {
         res.json('empty')

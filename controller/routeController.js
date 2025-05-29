@@ -6,7 +6,7 @@ const getRoutes = async (req, res) => {
         let result = await routeModel.find()
             .sort('origin')
 
-        res.render('index', { routes: result, session: req.session.user ? req.session.user.role : null })
+        res.render('index', { routes: result, session: req.session.user ? req.session.user : null })
 
     } catch (error) {
         console.log(error)
