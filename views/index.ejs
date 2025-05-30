@@ -6,33 +6,44 @@
     <title>Available Bus Routes</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 
-<body class="bg-gray-100 min-h-screen">
+<body class="min-h-screen">
 
     <%- include('partials/navbar') %>
 
         <div class="relative w-full overflow-hidden h-[500px] mt-2">
             <div id="carousel" class="flex transition-transform duration-700 ease-in-out w-full h-full">
-                <div class="min-w-full h-full bg-cover bg-center relative flex items-center justify-center text-white text-4xl font-bold"
+                <div class="min-w-full h-full bg-cover bg-center relative flex flex-col items-center justify-center text-white text-4xl font-bold"
                     style="background-image: url('/bus.jpg');">
-                    <span class="p-7 rounded-full bg-red-500 text-white">Comfortable Travel</span>
+                    <span class="p-10 mb-5 rounded text-white title">Your Journey, Our Priority</span>
+                    <p class="m-1 p-3 sub-title rounded text-center text-2xl mt-0 p-10 ">
+                        Experience hassle-free booking and on-time departures—every trip, every time.</p>
                 </div>
-                <div class="min-w-full h-full bg-cover bg-center relative flex items-center justify-center text-white text-4xl font-bold"
+                <div class="min-w-full h-full bg-cover bg-center relative flex flex-col items-center justify-center text-white text-4xl font-bold"
                     style="background-image: url('/bus1.jpg');">
-                    <span class="p-7 rounded-full bg-red-500 text-white">Comfortable Travel</span>
+                    <span class="p-10 mb-5 rounded text-white title">Ride Smart. Ride Easy</span>
+                    <p class="m-1 p-3 sub-title rounded text-center text-2xl mt-0 p-10 ">
+                        Plan, book, and ride with just a few clicks—bus travel made simple.</p>
                 </div>
-                <div class="min-w-full h-full bg-cover bg-center relative flex items-center justify-center text-white text-4xl font-bold"
+                <div class="min-w-full h-full bg-cover bg-center relative flex flex-col items-center justify-center text-white text-4xl font-bold"
                     style="background-image: url('/bus2.jpg');">
-                    <span class="p-7 rounded-full bg-red-500 text-white">Comfortable Travel</span>
+                    <span class="p-10 mb-5 rounded text-white title">Seamless Bus Travel, Every Time</span>
+                    <p class="m-1 p-3 sub-title rounded text-center text-2xl mt-0 p-10 ">
+                        From search to seat, we handle the details so you can relax.</p>
                 </div>
-                <div class="min-w-full h-full bg-cover bg-center relative flex items-center justify-center text-white text-4xl font-bold"
+                <div class="min-w-full h-full bg-cover bg-center relative flex flex-col items-center justify-center text-white text-4xl font-bold"
                     style="background-image: url('/bus3.jpg');">
-                    <span class="p-7 rounded-full bg-red-500 text-white">Comfortable Travel</span>
+                    <span class="p-10 mb-5 rounded text-white title">Fast, Safe, and Reliable Rides</span>
+                    <p class="m-1 p-3 sub-title rounded text-center text-2xl mt-0 p-10 ">
+                        Trust us to get you there with comfort, care, and punctuality.</p>
                 </div>
-                <div class="min-w-full h-full bg-cover bg-center relative flex items-center justify-center text-white text-4xl font-bold"
+                <div class="min-w-full h-full bg-cover bg-center relative flex flex-col items-center justify-center text-white text-4xl font-bold"
                     style="background-image: url('/bus4.jpg');">
-                    <span class="p-7 rounded-full bg-red-500 text-white">Comfortable Travel</span>
+                    <span class="p-10 mb-5 rounded text-white title">Book with Ease. Travel in Peace</span>
+                    <p class="m-1 p-3 sub-title rounded text-center text-2xl mt-0 p-10 ">
+                        A smoother way to travel—secure seats, no surprises.</p>
                 </div>
             </div>
 
@@ -47,8 +58,11 @@
         </div>
 
         <section>
-            <div class="text-2xl mt-4 font-semibold text-center">Top Search <span class="text-red-500">Routes</span>
+            <div class="break w-full pt-5 pb-15">
+                <div class="text-2xl font-semibold text-center">Top Search <span class="text-red-500">Routes</span>
+                </div>
             </div>
+
 
             <% if (routes.length> 0) { %>
                 <div class="mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4">
@@ -63,21 +77,24 @@
                                 </form>
                                 <% } %>
                                     <ul>
-                                        <div class="flex justify-between items-center mb-2">
-                                            <div>
+                                        <div class="flex inline-block w-full justify-between items-center mb-2">
+                                            <div class="flex justify-between items-center">
                                                 <p class="text-gray-700 text-sm">From:</p>
+                                                <p
+                                                    class="border border-gray-300 rounded px-3 inline-block text-gray-700">
+                                                    <%= route.km %> KM
+                                                </p>
+                                                <p class="text-gray-700 text-sm">To:</p>
+
+                                            </div>
+                                            <div class="flex justify-between items-center mb-2">
                                                 <span class="font-semibold">
                                                     <%= route.origin %>
                                                 </span>
-                                            </div>
-                                            <div>
-                                                <p
-                                                    class="border border-gray-400 rounded-xl p-1 px-3 inline-block text-gray-700">
-                                                    <%= route.km %> KM
+                                                <p><i class="bi bi-geo-alt text-red-500 text-lg"></i>
+                                                    ---------------------
+                                                    <i class="bi bi-flag text-red-500 text-lg"></i>
                                                 </p>
-                                            </div>
-                                            <div>
-                                                <p class="text-gray-700 text-sm">To:</p>
                                                 <span class="font-semibold">
                                                     <%= route.destination %>
                                                 </span>
@@ -107,6 +124,24 @@
                 <% } else { %>
                     <p class="text-center text-gray-600 p-5">No routes available at the moment.</p>
                     <% } %>
+        </section>
+        <section class="m-2">
+            <div class="text-center p-5 pb-0 text-3xl">Book Your Bus Ticket with Us</div>
+            <div class="rounded-xl sub-section p-10 mx-10 gap-10 flex flex-col">
+                <div class="px-5 text-xl">Who doesn’t love exploring places by road? The captivating landscapes that
+                    are seen on
+                    both sides of the bus are the sites to behold. Travelers who love to explore places by road can
+                    choose online bus booking at `Kelal Guzo` and also save huge money. Why would you go out and
+                    look
+                    for
+                    a travel agency to book a tour bus when you can do it by yourself? It takes less than a minute to
+                    book a bus ticket at `Kelal Guzo`. The simple interface, easy navigation, and fast speed of the
+                    portal
+                    allow you to book a bus to your favorite destination within a few seconds.</div>
+            </div>
+            <div class="mx-10 text-4xl">
+                ATSFSDUsgdosdoiahsiduasd
+            </div>
         </section>
 
         <%- include('partials/footer') %>
