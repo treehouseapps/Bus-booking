@@ -1,5 +1,5 @@
 <nav class="bg-white shadow py-5 px-15 flex items-center justify-between relative">
-    <div class="text-xl font-bold">Bus Booking</div>
+    <div class="text-2xl font-bold">` Kelal Guzo`</div>
 
     <ul class="flex gap-8 items-center">
         <li><a href="/" class="hover:scale-105 transition duration-200">Home</a></li>
@@ -9,7 +9,6 @@
 
         <% if (session && session.name) { %>
             <li class="relative">
-                <!-- Profile Button -->
                 <button id="profileBtn"
                     class="flex items-center space-x-3 bg-gray-100 px-3 py-1 rounded-full shadow text-gray-800 font-medium focus:outline-none">
                     <span>
@@ -20,7 +19,6 @@
                     </div>
                 </button>
 
-                <!-- Dropdown -->
                 <div id="profileDropdown"
                     class="hidden absolute right-0 mt-2 w-64 bg-white border border-gray-200 rounded shadow-lg z-50">
                     <div class="p-4 text-sm text-gray-700">
@@ -58,7 +56,6 @@
             dropdown.classList.toggle('hidden');
         });
 
-        // Optional: hide dropdown if clicked outside
         document.addEventListener('click', (e) => {
             if (!profileBtn.contains(e.target) && !dropdown.contains(e.target)) {
                 dropdown.classList.add('hidden');
