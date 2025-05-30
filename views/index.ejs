@@ -65,7 +65,7 @@
 
 
             <% if (routes.length> 0) { %>
-                <div class="mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4">
+                <div class="my-4 mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-8">
                     <% routes.forEach(route=> { %>
                         <div class="p-4 border border-gray-300 rounded-lg shadow bg-white">
                             <% if (session && session.role=='admin' ) { %>
@@ -126,7 +126,7 @@
                     <% } %>
         </section>
         <section class="m-2">
-            <div class="text-center p-5 pb-0 text-3xl">Book Your Bus Ticket with Us</div>
+            <div class="text-center p-5 m-5 pb-0 text-4xl"><b>Book Your Bus Ticket with Us</b></div>
             <div class="rounded-xl sub-section p-10 mx-10 gap-10 flex flex-col">
                 <div class="px-5 text-xl">Who doesn’t love exploring places by road? The captivating landscapes that
                     are seen on
@@ -140,7 +140,177 @@
                     allow you to book a bus to your favorite destination within a few seconds.</div>
             </div>
             <div class="mx-10 text-4xl">
-                ATSFSDUsgdosdoiahsiduasd
+                <p class="text-4xl m-5 my-8"><b>Why book with us?</b></p>
+                <section>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-6 bg-gray-100 text-center">
+
+                        <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition">
+                            <i class="bi bi-ticket-detailed text-blue-600 text-4xl mb-4"></i>
+                            <h3 class="text-xl font-semibold mb-2">Lowest Ticket Charges</h3>
+                            <p class="text-gray-600 text-sm">Grab huge discounts and cashbacks on your bus booking with
+                                EaseMyTrip.</p>
+                        </div>
+
+                        <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition">
+                            <i class="bi bi-person-fill-gear text-green-600 text-4xl mb-4"></i>
+                            <h3 class="text-xl font-semibold mb-2">3999+ Bus Operators</h3>
+                            <p class="text-gray-600 text-sm">Leverage our partnerships with over 3999 bus operators for
+                                a hassle-free journey.</p>
+                        </div>
+
+                        <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition">
+                            <i class="bi bi-journal-richtext text-yellow-500 text-4xl mb-4"></i>
+                            <h3 class="text-xl font-semibold mb-2">Seamless Booking</h3>
+                            <p class="text-gray-600 text-sm">Our user-friendly platform makes it easy for customers to
+                                book their bus tickets.</p>
+                        </div>
+
+                        <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition">
+                            <i class="bi bi-shield-check text-red-500 text-4xl mb-4"></i>
+                            <h3 class="text-xl font-semibold mb-2">Trusted by 20K+ Users</h3>
+                            <p class="text-gray-600 text-sm">20K+ users have trusted and enjoyed our seamless bus
+                                booking service.</p>
+                        </div>
+
+                    </div>
+                </section>
+            </div>
+        </section>
+        <section>
+            <p class="p-10 text-3xl text-center"><b>Our Carriers</b></p>
+            <div>
+                <div
+                    class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-6 p-6 bg-gray-50 text-center">
+
+                    <div class="flex flex-col carriers items-center">
+                        <div class="w-20 h-20 bg-gray-200 rounded-full overflow-hidden">
+                            <img src="https://guzo.s3.amazonaws.com/carrier_Q2Fycmllck5vZGU6Mw_logo_175107"
+                                alt="Abay Bus" class="w-full h-full object-cover">
+                        </div>
+                        <p class="mt-2 font-medium text-sm">Abay Bus</p>
+                    </div>
+
+                    <div class="flex flex-col carriers items-center">
+                        <div class="w-20 h-20 bg-gray-200 rounded-full overflow-hidden">
+                            <img src="https://guzo.s3.amazonaws.com/carrier_Q2Fycmllck5vZGU6MTc_logo_876203"
+                                alt="Africa Bus" class="w-full h-full object-cover">
+                        </div>
+                        <p class="mt-2 font-medium text-sm">Africa Bus</p>
+                    </div>
+
+                    <div class="flex flex-col carriers items-center">
+                        <div class="w-20 h-20 bg-gray-200 rounded-full overflow-hidden">
+                            <img src="https://guzo.s3.amazonaws.com/carrier_Q2Fycmllck5vZGU6MTI_logo_762241"
+                                alt="Air Bus" class="w-full h-full object-cover">
+                        </div>
+                        <p class="mt-2 font-medium text-sm">Air Bus</p>
+                    </div>
+
+                    <div class="flex flex-col carriers items-center">
+                        <div class="w-20 h-20 bg-gray-200 rounded-full overflow-hidden">
+                            <img src="https://guzo.s3.amazonaws.com/carrier_Q2Fycmllck5vZGU6MTU_logo_531964"
+                                alt="Alpha Bus" class="w-full h-full object-cover">
+                        </div>
+                        <p class="mt-2 font-medium text-sm">Alpha Bus</p>
+                    </div>
+
+                    <div class="flex flex-col carriers items-center">
+                        <div class="w-20 h-20 bg-gray-200 rounded-full overflow-hidden">
+                            <img src="https://guzo.s3.amazonaws.com/carrier_Q2Fycmllck5vZGU6MTk_logo_742188"
+                                alt="Buna Bus" class="w-full h-full object-cover">
+                        </div>
+                        <p class="mt-2 font-medium text-sm">Buna Bus</p>
+                    </div>
+
+                    <div class="flex flex-col carriers items-center">
+                        <div class="w-20 h-20 bg-gray-200 rounded-full overflow-hidden">
+                            <img src="https://guzo.s3.amazonaws.com/carrier_Q2Fycmllck5vZGU6NA_logo_999091"
+                                alt="Ethio Bus" class="w-full h-full object-cover">
+                        </div>
+                        <p class="mt-2 font-medium text-sm">Ethio Bus</p>
+                    </div>
+
+                    <div class="flex flex-col carriers items-center">
+                        <div class="w-20 h-20 bg-gray-200 rounded-full overflow-hidden">
+                            <img src="https://guzo.s3.amazonaws.com/carrier_Q2Fycmllck5vZGU6MTY_logo_716013"
+                                alt="FM Bus" class="w-full h-full object-cover">
+                        </div>
+                        <p class="mt-2 font-medium text-sm">FM Bus</p>
+                    </div>
+
+                    <div class="flex flex-col carriers items-center">
+                        <div class="w-20 h-20 bg-gray-200 rounded-full overflow-hidden">
+                            <img src="https://guzo.s3.amazonaws.com/carrier_Q2Fycmllck5vZGU6MTM_logo_105159"
+                                alt="Ghion Bus" class="w-full h-full object-cover">
+                        </div>
+                        <p class="mt-2 font-medium text-sm">Ghion Bus</p>
+                    </div>
+
+                    <div class="flex flex-col carriers items-center">
+                        <div class="w-20 h-20 bg-gray-200 rounded-full overflow-hidden">
+                            <img src="https://guzo.s3.amazonaws.com/carrier_Q2Fycmllck5vZGU6NQ_logo_542223"
+                                alt="Golden Bus" class="w-full h-full object-cover">
+                        </div>
+                        <p class="mt-2 font-medium text-sm">Golden Bus</p>
+                    </div>
+
+                    <div class="flex flex-col carriers items-center">
+                        <div class="w-20 h-20 bg-gray-200 rounded-full overflow-hidden">
+                            <img src="https://guzo.s3.amazonaws.com/carrier_Q2Fycmllck5vZGU6Ng_logo_964531"
+                                alt="Habesha Bus" class="w-full h-full object-cover">
+                        </div>
+                        <p class="mt-2 font-medium text-sm">Habesha Bus</p>
+                    </div>
+
+                    <div class="flex flex-col carriers items-center">
+                        <div class="w-20 h-20 bg-gray-200 rounded-full overflow-hidden">
+                            <img src="https://guzo.s3.amazonaws.com/carrier_Q2Fycmllck5vZGU6MTQ_logo_603841"
+                                alt="Noah Bus" class="w-full h-full object-cover">
+                        </div>
+                        <p class="mt-2 font-medium text-sm">Noah Bus</p>
+                    </div>
+
+                    <div class="flex flex-col carriers items-center">
+                        <div class="w-20 h-20 bg-gray-200 rounded-full overflow-hidden">
+                            <img src="https://guzo.s3.amazonaws.com/carrier_Q2Fycmllck5vZGU6MTE_logo_84608"
+                                alt="Odaa Bus" class="w-full h-full object-cover">
+                        </div>
+                        <p class="mt-2 font-medium text-sm">Odaa Bus</p>
+                    </div>
+
+                    <div class="flex flex-col carriers items-center">
+                        <div class="w-20 h-20 bg-gray-200 rounded-full overflow-hidden">
+                            <img src="https://guzo.s3.amazonaws.com/carrier_Q2Fycmllck5vZGU6MQ_logo_6100"
+                                alt="Selam Bus" class="w-full h-full object-cover">
+                        </div>
+                        <p class="mt-2 font-medium text-sm">Selam Bus</p>
+                    </div>
+                    <div class="flex flex-col carriers items-center">
+                        <div class="w-20 h-20 bg-gray-200 rounded-full overflow-hidden">
+                            <img src="https://guzo.s3.amazonaws.com/carrier_Q2Fycmllck5vZGU6Nw_logo_491979"
+                                alt="Walya Bus" class="w-full h-full object-cover">
+                        </div>
+                        <p class="mt-2 font-medium text-sm">Walya Bus</p>
+                    </div>
+
+                    <div class="flex flex-col carriers items-center">
+                        <div class="w-20 h-20 bg-gray-200 rounded-full overflow-hidden">
+                            <img src="https://guzo.s3.amazonaws.com/carrier_Q2Fycmllck5vZGU6OA_logo_750289"
+                                alt="Yegna Bus" class="w-full h-full object-cover">
+                        </div>
+                        <p class="mt-2 font-medium text-sm">Yegna Bus</p>
+                    </div>
+
+                    <div class="flex flex-col carriers items-center">
+                        <div class="w-20 h-20 bg-gray-200 rounded-full overflow-hidden">
+                            <img src="https://guzo.s3.amazonaws.com/carrier_Q2Fycmllck5vZGU6Mg_logo_677684"
+                                alt="Zemen Bus" class="w-full h-full object-cover">
+                        </div>
+                        <p class="mt-2 font-medium text-sm">Zemen Bus</p>
+                    </div>
+
+                </div>
+
             </div>
         </section>
 

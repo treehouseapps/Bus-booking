@@ -84,7 +84,7 @@
                         <span class="font-semibold">Departure:</span>
                     </div>
                     <div>
-                        <%= route.startingTime %>
+                        <%= route.startingTime %> AM
                     </div>
 
                     <div class="flex items-center space-x-2">
@@ -95,7 +95,7 @@
                         <span class="font-semibold">Arrival:</span>
                     </div>
                     <div>
-                        <%= route.arrivingTime %>
+                        <%= route.arrivingTime %> PM
                     </div>
 
                     <div class="flex items-center space-x-2">
@@ -108,12 +108,10 @@
                         <span class="font-semibold">Price:</span>
                     </div>
                     <div>
-                        <%= route.price %>
+                        $ <%= route.price %>
                     </div>
                 </div>
             </div>
-
-
 
         </div>
         <!-- Modal backdrop -->
@@ -152,8 +150,8 @@
                     <input type="hidden" name="price" value="<%= route.price %>">
                     <input type="hidden" name="km" value="<%= route.km %>">
                     <input type="hidden" name="busType" value="<%= bus.busType %>">
+                    <input type="hidden" value="" id="input" name="seatNumber">
 
-                    <input type="text" value="" id="input" name="seatNumber">
                     <input type="text" name="cardNumber" placeholder="Card Number" required
                         class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500" />
                     <button type="submit"
@@ -161,8 +159,6 @@
                 </form>
             </div>
         </div>
-
-
 
         <%- include('partials/footer') %>
 
