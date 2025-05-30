@@ -80,7 +80,7 @@ const login = async (req, res) => {
         if (!isMatch) return res.status(400).json({ message: "Password is Not Match" });
 
         const { _id, name, role } = user
-        req.session.user = { _id, name, role }
+        req.session.user = { _id, name, email, role }
         req.session.save((err) => {
             if (err) {
                 console.error('Session save error:', err);

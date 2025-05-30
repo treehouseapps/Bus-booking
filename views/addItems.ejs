@@ -10,10 +10,8 @@
 
 <body class="bg-gray-100 min-h-screen">
 
-    <!-- Navbar -->
     <%- include('partials/navbar') %>
 
-        <!-- Main Form Container -->
         <div class="flex justify-center items-center h-[85vh]">
             <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
                 <div class="flex justify-between mb-6">
@@ -21,7 +19,6 @@
                     <button id="toggleBus" class="font-semibold text-gray-600 hover:underline">Add Bus</button>
                 </div>
 
-                <!-- Route Form -->
                 <form id="routeForm" action="/admin/addroutes" method="POST" class="space-y-4">
                     <h2 class="text-xl font-bold text-center mb-4">Add Route</h2>
                     <div class="flex inline-flex gap-4">
@@ -84,16 +81,27 @@
                     </button>
                 </form>
 
-                <!-- Bus Form -->
                 <form id="busForm" action="/admin/addbus" method="POST" class="space-y-4 hidden">
                     <h2 class="text-xl font-bold text-center mb-4">Add Bus</h2>
                     <div class="flex items-center border rounded px-3 py-2 bg-gray-50">
                         <i class="bi bi-bus-front text-gray-500 mr-2"></i>
                         <select name="busType" id="busType" required class="w-full bg-transparent focus:outline-none">
-                            <option value="Airbus">Airbus</option>
-                            <option value="Higer">Higer</option>
-                            <option value="Yutong">Yutong</option>
-                            <option value="Tata Starbus">Tata Starbus</option>
+                            <option value="Abay Bus">Abay Bus</option>
+                            <option value="Africa Bus">Africa Bus</option>
+                            <option value="Air Bus">Air Bus</option>
+                            <option value="Alpha Bus">Alpha Bus</option>
+                            <option value="Buna Bus">Buna Bus</option>
+                            <option value="Ethio Bus">Ethio Bus</option>
+                            <option value="FM Bus">FM Bus</option>
+                            <option value="Ghion Bus">Ghion Bus</option>
+                            <option value="Golden Bus">Golden Bus</option>
+                            <option value="Habesha Bus">Habesha Bus</option>
+                            <option value="Noah Bus">Noah Bus</option>
+                            <option value="Odaa Bus">Odaa Bus</option>
+                            <option value="Selam Bus">Selam Bus</option>
+                            <option value="Walya Bus">Walya Bus</option>
+                            <option value="Yegna Bus">Yegna Bus</option>
+                            <option value="Zemen Bus">Zemen Bus</option>
                         </select>
                     </div>
                     <div class="flex items-center border rounded px-3 py-2 bg-gray-50">
@@ -109,10 +117,8 @@
             </div>
         </div>
 
-        <!-- Footer -->
         <%- include('partials/footer') %>
 
-            <!-- Toggle Script -->
             <script>
                 const routeForm = document.getElementById('routeForm');
                 const busForm = document.getElementById('busForm');

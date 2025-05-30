@@ -1,5 +1,6 @@
-<nav class="bg-white shadow py-5 px-15 flex items-center justify-between">
+<nav class="bg-white shadow py-5 px-15 flex items-center justify-between relative">
     <div class="text-xl font-bold">Bus Booking</div>
+
     <ul class="flex gap-8 items-center">
         <li><a href="/" class="hover:scale-105 transition duration-200">Home</a></li>
         <li><a href="/services" class="hover:scale-105 transition duration-200">Service</a></li>
@@ -7,18 +8,33 @@
         <li><a href="/admin" class="hover:scale-105 transition duration-200">About</a></li>
 
         <% if (session && session.name) { %>
-            <li>
-                <div
-                    class="flex items-center space-x-3 bg-gray-100 px-3 py-1 rounded-full shadow text-gray-800 font-medium">
+            <li class="relative">
+                <!-- Profile Button -->
+                <button id="profileBtn"
+                    class="flex items-center space-x-3 bg-gray-100 px-3 py-1 rounded-full shadow text-gray-800 font-medium focus:outline-none">
                     <span>
                         <%= session.name %>
                     </span>
-                    <a href="/destroy"
-                        class="text-red-500 hover:text-red-700 text-sm border border-red-500 px-2 py-1 rounded-lg">
-                        Logout
-                    </a>
                     <div class="w-8 h-8 rounded-full bg-gray-400 flex items-center justify-center text-white text-sm">
                         <i class="bi bi-person-fill"></i>
+                    </div>
+                </button>
+
+                <!-- Dropdown -->
+                <div id="profileDropdown"
+                    class="hidden absolute right-0 mt-2 w-64 bg-white border border-gray-200 rounded shadow-lg z-50">
+                    <div class="p-4 text-sm text-gray-700">
+                        <p><span class="font-semibold">Name:</span>
+                            <%= session.name %>
+                        </p>
+                        <p><span class="font-semibold">Role:</span>
+                            <%= session.role %>
+                        </p>
+                        <p><span class="font-semibold">Email:</span>
+                            <%= session.email %>
+                        </p>
+                        <a href="/destroy"
+                            class="block mt-3 text-center bg-red-500 text-white py-1 rounded hover:bg-red-600">Logout</a>
                     </div>
                 </div>
             </li>
@@ -32,3 +48,21 @@
                 <% } %>
     </ul>
 </nav>
+
+<script>
+    const profileBtn = document.getElementById('profileBtn');
+    const dropdown = document.getElementById('profileDropdown');
+
+    if (profileBtn) {
+        profileBtn.addEventListener('click', () => {
+            dropdown.classList.toggle('hidden');
+        });
+
+        // Optional: hide dropdown if clicked outside
+        document.addEventListener('click', (e) => {
+            if (!profileBtn.contains(e.target) && !dropdown.contains(e.target)) {
+                dropdown.classList.add('hidden');
+            }
+        });
+    }
+</script>
