@@ -12,49 +12,50 @@
 
     <!-- Navbar -->
     <%- include('partials/navbar') %>
+        <div class="flex gap-40 flex-1 p-2">
+            <%- include('partials/sidebar') %>
+                <div class="container mx-auto py-10">
+                    <h1 class="text-3xl font-bold mb-6 text-center">Available Buses</h1>
 
-        <div class="container mx-auto py-10">
-            <h1 class="text-3xl font-bold mb-6 text-center">Available Buses</h1>
+                    <% if (data.length===0) { %>
+                        <p class="text-center text-gray-600">No buses found.</p>
+                        <% } else { %>
+                            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                <% data.forEach(bus=> { %>
+                                    <div class="bg-white p-4 rounded shadow relative">
+                                        <%if(session && session.role=='admin' ){%>
+                                            <form action="/admin/deletebus/<%= bus._id %>" method="get"
+                                                class="absolute top-2 right-2">
+                                                <button type="submit" title="Delete Bus"
+                                                    class="text-red-600 hover:text-red-800 text-lg">
+                                                    <i class="bi bi-trash-fill"></i>
+                                                </button>
+                                            </form>
+                                            <%}%>
 
-            <% if (data.length===0) { %>
-                <p class="text-center text-gray-600">No buses found.</p>
-                <% } else { %>
-                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        <% data.forEach(bus=> { %>
-                            <div class="bg-white p-4 rounded shadow relative">
-                                <%if(session && session.role=='admin' ){%>
-                                    <form action="/admin/deletebus/<%= bus._id %>" method="get"
-                                        class="absolute top-2 right-2">
-                                        <button type="submit" title="Delete Bus"
-                                            class="text-red-600 hover:text-red-800 text-lg">
-                                            <i class="bi bi-trash-fill"></i>
-                                        </button>
-                                    </form>
-                                    <%}%>
+                                                <h2 class="text-xl font-semibold text-red-600">
+                                                    <%= bus.busType %>
+                                                </h2>
+                                                <p class="mt-2">Total Seats: <%= bus.seatsAvailable.length %>
+                                                </p>
+                                                <p class="mt-2">Status: <%= bus.status %>
+                                                </p>
 
-                                        <h2 class="text-xl font-semibold text-red-600">
-                                            <%= bus.busType %>
-                                        </h2>
-                                        <p class="mt-2">Total Seats: <%= bus.seatsAvailable.length %>
-                                        </p>
-                                        <p class="mt-2">Status: <%= bus.status %>
-                                        </p>
-
-                                        <ul class="mt-2 grid grid-cols-6 gap-2 text-sm text-gray-600">
-                                            <% bus.seatsAvailable.forEach(seat=> { %>
-                                                <li
-                                                    class="<%= seat.isReserved ? 'text-red-500' : 'text-green-600 font-semibold' %>">
-                                                    Seat <%= seat.seatNumber %>
-                                                </li>
-                                                <% }) %>
-                                        </ul>
+                                                <ul class="mt-2 grid grid-cols-6 gap-2 text-sm text-gray-600">
+                                                    <% bus.seatsAvailable.forEach(seat=> { %>
+                                                        <li
+                                                            class="<%= seat.isReserved ? 'text-red-500' : 'text-green-600 font-semibold' %>">
+                                                            Seat <%= seat.seatNumber %>
+                                                        </li>
+                                                        <% }) %>
+                                                </ul>
+                                    </div>
+                                    <% }) %>
                             </div>
-                            <% }) %>
-                    </div>
 
-                    <% } %>
+                            <% } %>
+                </div>
         </div>
-
         <%- include('partials/footer') %>
 </body>
 

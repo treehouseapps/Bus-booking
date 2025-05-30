@@ -12,46 +12,50 @@
 
     <!-- Navbar -->
     <%- include('partials/navbar') %>
-        <section>
-            <div class="text-2xl mt-4 font-semibold text-center">Users List
-            </div>
+        <div class="flex gap-40 flex-1 p-2">
+            <%- include('partials/sidebar') %>
+                <section class="px-6 py-8">
+                    <h2 class="text-2xl font-semibold text-center mb-6">Users List</h2>
 
-            <% if (data.length> 0) { %>
-                <div>
-                    <div class="m-10 grid grid-cols-4 gap-4">
-                        <%data.map((item)=>{%>
-                            <div class="relative p-4 pb-2 border border-gray-500 rounded-lg shadow">
-                                <%if(session && session.role=='admin' ){%>
-                                    <form action="/delete/<%= item._id %>" method="get" class="absolute top-2 right-2">
-                                        <button type="submit" title="Delete"
-                                            class="text-red-500 hover:text-red-700 transition">
-                                            <i class="bi bi-trash-fill"></i>
-                                        </button>
-                                    </form>
-                                    <%}%>
-                                        <ul>
-                                            <p class="p-2 text-gray-500">
-                                                <%= item._id %>
-                                            </p>
-                                            <p class="p-2">
-                                                NAME: <%= item.name %>
-                                            </p>
-                                            <p class="p-2">
-                                                EMAIL: <%= item.email %>
-                                            </p>
-                                            <p class="font-semibold p-2">
-                                                <%= item.role %>
-                                            </p>
-                                        </ul>
-                            </div>
+                    <% if (data.length> 0) { %>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                            <% data.map((item)=> { %>
+                                <div
+                                    class="relative border rounded-lg shadow-md p-5 bg-white hover:shadow-lg transition duration-300">
 
-                            <%})%>
-                    </div>
-                </div>
-                <% } else { %>
-                    <p class="text-center text-gray-600 p-5">No users available at the moment.</p>
-                    <% } %>
-        </section>
+                                    <% if (session && session.role==='admin' ) { %>
+                                        <form action="/delete/<%= item._id %>" method="get"
+                                            class="absolute top-3 right-3">
+                                            <button type="submit" title="Delete"
+                                                class="text-red-500 hover:text-red-700 text-lg transition">
+                                                <i class="bi bi-trash-fill"></i>
+                                            </button>
+                                        </form>
+                                        <% } %>
+
+                                            <ul class="space-y-2 text-sm text-gray-700">
+                                                <li class="text-gray-400 break-all">
+                                                    <%= item._id %>
+                                                </li>
+                                                <li><strong>Name:</strong>
+                                                    <%= item.name %>
+                                                </li>
+                                                <li><strong>Email:</strong>
+                                                    <%= item.email %>
+                                                </li>
+                                                <li class="text-sm font-semibold text-red-500 uppercase tracking-wide">
+                                                    <%= item.role %>
+                                                </li>
+                                            </ul>
+                                </div>
+                                <% }) %>
+                        </div>
+                        <% } else { %>
+                            <p class="text-center text-gray-600 mt-6">No users available at the moment.</p>
+                            <% } %>
+                </section>
+
+        </div>
         <%- include('partials/footer') %>
 
 </body>
