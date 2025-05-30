@@ -4,9 +4,11 @@ const app = express()
 const cors = require('cors')
 const routes = require('./routes/routes')
 const connection = require('./config/connection')
+const path = require('path');
 const session = require('express-session');
 
-app.use(express.static('public'));
+
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
