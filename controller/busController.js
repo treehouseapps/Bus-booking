@@ -96,7 +96,7 @@ const deleteBus = async (req, res) => {
     }
 }
 const reserveSeat = async (req, res) => {
-    if (!req.session.user || req.session.user.role !== 'admin') {
+    if (!req.session.user) {
         res.redirect('/login')
         return
     }
