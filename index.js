@@ -6,17 +6,16 @@ const routes = require('./routes/routes')
 const connection = require('./config/connection')
 const path = require('path');
 const session = require('express-session');
+const MongoStore = require("connect-mongo");
 
 
 app.use(express.static(path.join(__dirname, 'public')));
-const session = require("express-session");
-const MongoStore = require("connect-mongo");
 
 app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
-    store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
+    store: MongoStore.create({ mongoUrl: process.env.DBCONNECTION }),
     cookie: { maxAge: 1000 * 60 * 60 * 1 }
 }));
 app.use((req, res, next) => {
